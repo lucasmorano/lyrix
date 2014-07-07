@@ -73,7 +73,8 @@ public class MainActivity extends Activity {
     private void updateContent(String artist, String track, String album) {
         title.setText(artist + " - " + track);
         title.setTextSize(15);
-        new Plyrics(getCurrentActivity()).execute(artist, track);
+//        new Plyrics(getCurrentActivity()).execute(artist, track);
+        new GlowWorm(getCurrentActivity()).execute(artist, track);
     }
 
     @Override

@@ -12,14 +12,14 @@ import java.util.regex.Pattern;
 /**
  * Created by lucasmorano on 7/6/14.
  */
-public class Plyrics extends LyricProvider {
+public class GlowWorm extends LyricProvider {
 
     private MainActivity activity;
-    private static final String ENDPOINT = "http://www.plyrics.com/lyrics/";
+    private static final String ENDPOINT = "http://www.vagalume.com.br/";
 
     private String lyrics;
 
-    public Plyrics(MainActivity activity) {
+    public GlowWorm(MainActivity activity) {
         this.activity = activity;
     }
 
@@ -33,9 +33,9 @@ public class Plyrics extends LyricProvider {
 
     @Override
     protected String extractLyrics(String rawLyrics) {
-        Matcher matcher = Pattern.compile("(?<=(<!-- start of lyrics -->)).*?(?=(<!-- end of lyrics -->))", Pattern.DOTALL).matcher(rawLyrics);
+        Matcher matcher = Pattern.compile("(?<=(<div itemprop=description>)).*?(?=(</div>))", Pattern.DOTALL).matcher(rawLyrics);
         if(matcher.find()){
-            return matcher.group().replaceAll("<br />","");
+            return matcher.group().replaceAll("<br />|<br/>","\n");
         }
         return "Sorry, I was not able to find lyrics to this song :(";
     }
@@ -56,7 +56,7 @@ public class Plyrics extends LyricProvider {
             String rawLyrics = response.body().string();
             lyrics = extractLyrics(rawLyrics);
         } catch (IOException e) {
-            Log.e("LYRIX - PL ", e.getMessage());
+            Log.e("LYRIX - GW ", e.getMessage());
         }
         return null;
     }
@@ -67,6 +67,6 @@ public class Plyrics extends LyricProvider {
     }
 
     public static String formatStringToUrl(String text) {
-        return text.replaceAll("[',.$#@%&]", "").replaceAll("\\.", "").replaceAll("\\s+", "").replaceAll("\\*", "c").toLowerCase();
+        return text.replaceAll("[',.$#@%&]", "").replaceAll("\\.", "").replaceAll("\\s+", "-").replaceAll("\\*", "c").toLowerCase();
     }
 }
