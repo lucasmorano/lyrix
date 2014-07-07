@@ -55,6 +55,7 @@ public class GlowWorm extends LyricProvider {
             response = getClient().newCall(request).execute();
             String rawLyrics = response.body().string();
             lyrics = extractLyrics(rawLyrics);
+            GlobalResource.setLyrics(lyrics);
         } catch (IOException e) {
             Log.e("LYRIX - GW ", e.getMessage());
         }
@@ -64,6 +65,7 @@ public class GlowWorm extends LyricProvider {
     @Override
     protected void onPostExecute(String lyrics) {
         activity.updateLyrics(this.lyrics);
+        WidgetProvider.pushWidgetUpdate(activity, WidgetProvider.createRemoteViews(activity));
     }
 
     public static String formatStringToUrl(String text) {

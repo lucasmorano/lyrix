@@ -1,6 +1,8 @@
 package com.mrn.lyrix;
 
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.BroadcastReceiver;
@@ -9,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,6 +75,7 @@ public class MainActivity extends Activity {
 
     private void updateContent(String artist, String track, String album) {
         title.setText(artist + " - " + track);
+        GlobalResource.setTitle(artist + " - " + track);
         title.setTextSize(15);
 //        new Plyrics(getCurrentActivity()).execute(artist, track);
         new GlowWorm(getCurrentActivity()).execute(artist, track);
@@ -98,23 +102,6 @@ public class MainActivity extends Activity {
 
     public MainActivity getCurrentActivity() {
         return MainActivity.this;
-    }
-
-    private class WidgetProvider extends AppWidgetProvider {
-
-        @Override
-        public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
-            remoteViews.setTextViewText(R.id.title, title.getText());
-            remoteViews.setTextViewText(R.id.desc, lyrics.getText());
-            pushWidgetUpdate(context, remoteViews);
-        }
-
-        public void pushWidgetUpdate(Context context, RemoteViews remoteViews) {
-            ComponentName myWidget = new ComponentName(context, WidgetProvider.class);
-            AppWidgetManager manager = AppWidgetManager.getInstance(context);
-            manager.updateAppWidget(myWidget, remoteViews);
-        }
     }
 
 }
