@@ -7,4 +7,4 @@ Lyrix is a simple application with the idea to help users that really wanted the
 Feel free to participate and enjoy.
 
 
-- Lucas Morano
+Lucas Morano
