@@ -1,7 +1,10 @@
 lyrix
 =====
 
-Lyrix is a simple application with the idea to help users that really wanted the lyric feature to 3rd party music apps such as Rdio, Spotify. With NON COMMERCIAL purposes it has the only goal of entertainment and education.
+Lyrix is a simple application with the idea to help users that really wanted the lyrics feature to music stream apps such as Rdio, Spotify. With NON COMMERCIAL purposes this project goals are entertainment and education only.
 
 
 Feel free to participate and enjoy.
+
+
+- Lucas Morano
