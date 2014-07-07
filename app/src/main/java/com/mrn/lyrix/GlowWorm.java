@@ -67,6 +67,6 @@ public class GlowWorm extends LyricProvider {
     }
 
     public static String formatStringToUrl(String text) {
-        return text.replaceAll("[',.$#@%&]", "").replaceAll("\\.", "").replaceAll("\\s+", "-").replaceAll("\\*", "c").toLowerCase();
+        return text.replaceAll("\\[(.*?)\\]", "").trim().replaceAll("[',.$#@%&]|", "").replaceAll("\\.", "").replaceAll("\\s+", "-").replaceAll("\\*", "c").toLowerCase();
     }
 }
